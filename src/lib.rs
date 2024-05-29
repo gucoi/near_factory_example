@@ -1,4 +1,3 @@
-use near_sdk::store::LazyOption;
 use near_sdk::{near, Gas, NearToken};
 
 mod deploy;
@@ -11,13 +10,13 @@ const NO_DEPOSIT: NearToken = NearToken::from_near(0);
 
 #[near(contract_state)]
 pub struct Contract {
-    code: LazyOption<Vec<u8>>,
+    code: Option<Vec<u8>>,
 }
 
 impl Default for Contract {
     fn default() -> Self {
         Self {
-            code: LazyOption::new("code".as_bytes(), Some(DEFAULT_CONTRACT.to_vec())),
+            code: Some(DEFAULT_CONTRACT.to_vec()),
         }
     }
 }
